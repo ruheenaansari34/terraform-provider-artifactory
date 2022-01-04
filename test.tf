@@ -34,7 +34,7 @@ resource "artifactory_remote_repository" "test-smart-remote" {
   notes                                 = "abcd note"
   offline                               = false
   package_type                          = "nuget"
-  password                              = "AKCp8jRGWSveu7e7f3sErVdG49Ci6wR9j2R1hgVGWirmPN8LCGYrYaPD4a6VananruzR4paK4"
+  password                              = ""
   property_sets                         = [
       "artifactory",
   ]
