@@ -37,7 +37,6 @@ pipelines:
             - name: GitHubTFProviderRepoJFrog
           environmentVariables:
             NEW_RT_PASSWORD: ${int_gkeEnvVars_new_rt_password}
-            ARTIFACTORY_LICENSE:
         execution:
           onStart:
             - echo "Preparing for work..."
