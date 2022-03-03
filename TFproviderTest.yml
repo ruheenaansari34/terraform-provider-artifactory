@@ -31,8 +31,8 @@ pipelines:
             - name: partnersSlack
             - name: gkeEnvVars
             - name: Partnership_GitHub
-          inputSteps:
-            - name: fozzie_gke_jfrog_rt_xray_create
+#          inputSteps:
+#            - name: fozzie_gke_jfrog_rt_xray_create
           inputResources:
             - name: GitHubTFProviderRepoJFrog
           environmentVariables:
