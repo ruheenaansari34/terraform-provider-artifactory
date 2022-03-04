@@ -70,6 +70,7 @@ pipelines:
             - jfrog config show
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
+            - ls -al && pwd
             - cp native-steps/license/artifactory.cluster.license artifactory.lic
             - ./scripts/run-artifactory.sh
 
