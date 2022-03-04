@@ -99,10 +99,11 @@ pipelines:
             - make acceptance
             - make install
           onSuccess:
-            - send_notification partnersSlack --text "Terraform Provider run is completed. Version ${NEXT_PROVIDER_VERSION}."
+            - echo "Success"
+            #- send_notification partnersSlack --text "Terraform Provider run is completed. Version ${NEXT_PROVIDER_VERSION}."
           onFailure:
             - echo "Failure"
-            - send_notification partnersSlack --text "Pipeline failed on <${step_url}|${step_name}> step"
+            #- send_notification partnersSlack --text "Pipeline failed on <${step_url}|${step_name}> step"
           onComplete:
             - echo "Complete"
 
