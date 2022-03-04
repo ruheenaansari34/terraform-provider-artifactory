@@ -71,7 +71,7 @@ pipelines:
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - ls -al && pwd
-            - cp native-steps/license/artifactory.cluster.license artifactory.lic
+            - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
             - ./scripts/run-artifactory.sh
 
             - echo "Add variables needed to run Terraform Provider"
