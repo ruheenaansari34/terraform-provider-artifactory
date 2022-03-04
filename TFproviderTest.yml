@@ -65,6 +65,8 @@ pipelines:
             - cp sample.tf.tmp sample.tf && rm sample.tf.tmp
             - cat sample.tf
             ## try to run Artifactory with docker compose
+            - printenv
+            - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - cp native-steps/license/artifactory.cluster.license artifactory.lic
             - ./scripts/run-artifactory.sh
