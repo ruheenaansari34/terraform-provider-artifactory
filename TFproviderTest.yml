@@ -31,6 +31,7 @@ pipelines:
             - name: partnersSlack
             - name: gkeEnvVars
             - name: Partnership_GitHub
+            - name: PartnershipArtifactory
 #          inputSteps:
 #            - name: fozzie_gke_jfrog_rt_xray_create
           inputResources:
@@ -66,6 +67,7 @@ pipelines:
             - cat sample.tf
             ## try to run Artifactory with docker compose
             - printenv
+            - jfrog config show
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - cp native-steps/license/artifactory.cluster.license artifactory.lic
