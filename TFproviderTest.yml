@@ -72,6 +72,7 @@ pipelines:
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
+            - apt-get update && apt-get install -y apt-utils
             - cd scripts && apt-get install -y docker-compose -f
             - ./run-artifactory.sh
             - echo "Add variables needed to run Terraform Provider"
