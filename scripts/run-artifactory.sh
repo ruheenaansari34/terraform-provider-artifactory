@@ -8,6 +8,11 @@ set -euf
 
 docker-compose --project-directory ${SCRIPT_DIR} up -d --remove-orphans
 
+## test
+docker-compose images
+docker-compose top
+curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/
+
 echo "Waiting for Artifactory 1 to start"
 until curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/; do
     printf '.'
