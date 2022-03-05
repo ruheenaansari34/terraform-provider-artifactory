@@ -73,7 +73,11 @@ pipelines:
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
             - apt-get update && apt-get install -y apt-utils docker
-            - cd scripts && apt-get install -y docker-compose -f
+            - apt update
+            - apt remove docker-compose -y
+            - apt autoremove -y
+            - apt install docker-compose -y
+            - cd scripts
             - ./run-artifactory.sh
             - echo "Add variables needed to run Terraform Provider"
             - export ARTIFACTORY_URL="localhost:8082" && echo ${ARTIFACTORY_URL}
