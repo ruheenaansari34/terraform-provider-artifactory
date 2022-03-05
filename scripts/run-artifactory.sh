@@ -1,13 +1,14 @@
 #!/usr/bin/env sh
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+echo "${SCRIPT_DIR}"
 export ARTIFACTORY_VERSION=${ARTIFACTORY_VERSION:-7.27.10}
 echo "ARTIFACTORY_VERSION=${ARTIFACTORY_VERSION}"
 
 set -euf
 
-docker-compose --project-directory ${SCRIPT_DIR} up -d --remove-orphans
-
+#docker-compose --project-directory ${SCRIPT_DIR} up -d --remove-orphans
+docker run -itd -v /var/run/docker.sock:/var/run/docker.sock -v /root/test/:/var/tmp/ docker/compose:1.24.1  -f docker-compose.yaml up -d
 ## test
 docker-compose images
 docker-compose top
