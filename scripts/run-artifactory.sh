@@ -14,6 +14,8 @@ docker-compose top
 curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/
 
 echo "Waiting for Artifactory 1 to start"
+## test
+curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/
 until curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/; do
     printf '.'
     sleep 4
