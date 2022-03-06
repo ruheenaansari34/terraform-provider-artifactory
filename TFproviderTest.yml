@@ -73,18 +73,19 @@ pipelines:
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
             - apt-get update && apt-get install -y apt-utils docker
-            - apt update
-            - apt remove docker-compose -y
-            - apt autoremove -y
-            - mkdir -p ~/.docker/cli-plugins/
-            - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            - sudo chmod +x /usr/local/bin/docker-compose
+            - docker run -it --rm -v "scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" -p 8081:8081 -p 8082:8082 releases-docker.jfrog.io/jfrog/artifactory-pro:7.33.12 /bin/bash
+#            - apt update
+#            - apt remove docker-compose -y
+#            - apt autoremove -y
+#            - mkdir -p ~/.docker/cli-plugins/
+#            - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#            - sudo chmod +x /usr/local/bin/docker-compose
             #- curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
             #- chmod +x ~/.docker/cli-plugins/docker-compose
-            - export USER=$(whoami) && sudo chown $USER /var/run/docker.sock
-            - docker-compose version
-            - cd scripts
-            - bash run-artifactory.sh
+#            - export USER=$(whoami) && sudo chown $USER /var/run/docker.sock
+#            - docker-compose version
+#            - cd scripts
+#            - ./run-artifactory.sh
             - echo "Add variables needed to run Terraform Provider"
             - export ARTIFACTORY_URL="localhost:8082" && echo ${ARTIFACTORY_URL}
             - export ARTIFACTORY_USERNAME=admin
