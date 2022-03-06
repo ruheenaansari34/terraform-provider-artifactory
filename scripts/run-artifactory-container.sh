@@ -11,7 +11,7 @@ echo "Waiting for Artifactory to start"
 echo "Sleep"
 sleep 60
 docker ps
-curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/
+curl -sf -u admin:password http://0.0.0.0:8081/artifactory/api/system/licenses/
 
 #echo "Waiting for Artifactory to start"
 #until curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/; do
