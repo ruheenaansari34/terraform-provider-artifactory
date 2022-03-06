@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
 
@@ -8,8 +8,12 @@ docker run -i -t -d --rm -v "${SCRIPT_DIR}/artifactory.lic:/artifactory_extra_co
   -p8081:8081 -p8082:8082 -p8080:8080 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
 
 echo "Waiting for Artifactory to start"
-until curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/; do
-    printf '.'
-    sleep 4
-done
-echo ""
+sleep 60
+curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/
+
+#echo "Waiting for Artifactory to start"
+#until curl -sf -u admin:password http://localhost:8081/artifactory/api/system/licenses/; do
+#    printf '.'
+#    sleep 4
+#done
+#echo ""
