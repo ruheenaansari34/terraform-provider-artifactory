@@ -1,17 +1,17 @@
-#resources:
-#  - name: GitHubTFProviderRepoJFrog
-#    type: GitRepo
-#    configuration:
-#      gitProvider: Partnership_GitHub
-#      path: jfrog/terraform-provider-artifactory # if path is modified, change the name as well, per Pipelines doc
-#      branches:
-#        include: pipelines-test
-#      buildOn:
-#        #commit: false
-#        commit: true
-#        #pullRequestCreate: true
-#      #cancelPendingRunsOn:
-#        #pullRequestUpdate: true
+resources:
+  - name: GitHubTFProviderRepoJFrogTest
+    type: GitRepo
+    configuration:
+      gitProvider: Partnership_GitHub
+      path: jfrog/terraform-provider-artifactory # if path is modified, change the name as well, per Pipelines doc
+      branches:
+        include: pipelines-test
+      buildOn:
+        #commit: false
+        commit: true
+        #pullRequestCreate: true
+      #cancelPendingRunsOn:
+        #pullRequestUpdate: true
 pipelines:
   - name: tf_provider_artifactory
     steps:
@@ -35,7 +35,7 @@ pipelines:
 #          inputSteps:
 #            - name: fozzie_gke_jfrog_rt_xray_create
           inputResources:
-            - name: GitHubTFProviderRepoJFrog
+            - name: GitHubTFProviderRepoJFrogTest
           environmentVariables:
             NEW_RT_PASSWORD: ${int_gkeEnvVars_new_rt_password}
         execution:
