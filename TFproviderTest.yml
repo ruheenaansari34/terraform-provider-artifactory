@@ -83,7 +83,7 @@ pipelines:
             #- chmod +x ~/.docker/cli-plugins/docker-compose
 #            - export USER=$(whoami) && sudo chown $USER /var/run/docker.sock
 #            - docker-compose version
-            - cd scripts
+            - cd scripts && ls -al
             - ./run-artifactory-container.sh
             - echo "Add variables needed to run Terraform Provider"
             - export ARTIFACTORY_URL="localhost:8082" && echo ${ARTIFACTORY_URL}
