@@ -74,14 +74,12 @@ pipelines:
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
-            #- apt-get update && apt-get install -y apt-utils docker
-            - cd scripts && ls -al
-            - container=$(date +%s)
-            - docker run -d -it --name ${container} -i -t -d --rm -v "$(pwd)/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" -p 8081:8081 -p 8082:8082 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
-            - docker ps -al
-            - sleep 240
-            - sudo curl http://localhost:8082/router/api/v1/system/health
-            #- ./run-artifactory-container.sh
+#            - container=$(date +%s)
+#            - docker run -d -it --name ${container} -i -t -d --rm -v "$(pwd)scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" -p 8081:8081 -p 8082:8082 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
+#            - docker ps -al
+#            - sleep 240
+#            - sudo curl http://localhost:8082/router/api/v1/system/health
+            - ./run-artifactory.sh
             - echo "Add variables needed to run Terraform Provider"
             - export ARTIFACTORY_URL="localhost:8082" && echo ${ARTIFACTORY_URL}
             - export ARTIFACTORY_USERNAME=admin
