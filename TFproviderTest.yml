@@ -79,7 +79,7 @@ pipelines:
 #            - docker ps -al
 #            - sleep 240
 #            - sudo curl http://localhost:8082/router/api/v1/system/health
-            - ./run-artifactory.sh
+            - ./scripts/run-artifactory.sh
             - echo "Add variables needed to run Terraform Provider"
             - export ARTIFACTORY_URL="localhost:8082" && echo ${ARTIFACTORY_URL}
             - export ARTIFACTORY_USERNAME=admin
