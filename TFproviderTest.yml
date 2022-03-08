@@ -72,6 +72,7 @@ pipelines:
             - jfrog config show
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
+            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath}
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
 #            - container=$(date +%s)
