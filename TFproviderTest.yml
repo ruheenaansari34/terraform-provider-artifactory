@@ -45,7 +45,7 @@ pipelines:
             - echo "Preparing for work..."
             - ls -al && pwd
           onExecute:
-            #- go version
+            - go version
 #            - echo "Install Terraform"
 #            - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DA418C88A3219F7B
 #            - sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -98,6 +98,7 @@ pipelines:
             - echo "Get cookie to generate Access token"
             - curl --version
             - sleep 240
+            - sudo curl http://localhost:8082/router/api/v1/system/health
             - >-
               curl -c - "${ARTIFACTORY_URL}/ui/api/v1/ui/auth/login?_spring_security_remember_me=false" \
                               --header "accept: application/json, text/plain, */*" \
