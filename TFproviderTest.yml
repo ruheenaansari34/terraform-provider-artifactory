@@ -115,7 +115,7 @@ pipelines:
             - echo "Unset ARTIFACTORY_PASSWORD, acceptance test will use ARTIFACTORY_ACCESS_TOKEN instead"
             - unset ARTIFACTORY_PASSWORD
             - export TF_ACC=1
-            - make acceptance
+            #- make acceptance
             - make install
           onSuccess:
             - echo "Success"
