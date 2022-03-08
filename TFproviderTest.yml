@@ -81,7 +81,7 @@ pipelines:
             - export ARTIFACTORY_USERNAME=admin
             - export ARTIFACTORY_PASSWORD=password
             - echo "Get cookie to generate Access token. We need a pause to let UI come up to get cookies"
-            - sleep 240
+            - sleep 180
             - sudo curl http://localhost:8082/router/api/v1/system/health
             - >-
               export COOKIES=$(curl -c - "${ARTIFACTORY_URL}/ui/api/v1/ui/auth/login?_spring_security_remember_me=false" \
@@ -139,7 +139,7 @@ pipelines:
               fi
           onSuccess:
             - echo "Success"
-            - send_notification partnersSlack --text "<${res_GitHubTFProviderRepoJFrogTest_gitRepoRepositoryHttpsUrl}|Terraform Provider>. A new PR was submitted by *${PR_COMMITTER}* - <${PR_URL}|${PR_TITLE}>, branch *${PR_BRANCH}*. Changes tested successfully. <@U01DWTXV01M> please, review and merge."
+            #- send_notification partnersSlack --text "<${res_GitHubTFProviderRepoJFrogTest_gitRepoRepositoryHttpsUrl}|Terraform Provider>. A new PR was submitted by *${PR_COMMITTER}* - <${PR_URL}|${PR_TITLE}>, branch *${PR_BRANCH}*. Changes tested successfully. <@U01DWTXV01M> please, review and merge."
           onFailure:
             - >-
               if [[ "${PR_URL}" == null ]]; then
