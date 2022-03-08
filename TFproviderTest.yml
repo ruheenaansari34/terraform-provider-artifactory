@@ -99,6 +99,10 @@ pipelines:
                                   --header "accept: application/json, text/plain, */*" \
                                   --header "x-requested-with: XMLHttpRequest" \
                                   --header "cookie: ACCESSTOKEN=${ACCESSTOKEN}; REFRESHTOKEN=${REFRESHTOKEN}")
+            - echo ${COOKIES}
+            - echo ${REFRESHTOKEN}
+            - echo ${ACCESSTOKEN}
+            - echo ${ACCESS_KEY}
             - add_run_variables ARTIFACTORY_ACCESS_TOKEN=${ACCESS_KEY}
             - echo "Unset ARTIFACTORY_PASSWORD, acceptance test will use ARTIFACTORY_ACCESS_TOKEN instead"
             - unset ARTIFACTORY_PASSWORD
