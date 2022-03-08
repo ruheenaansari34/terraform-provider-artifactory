@@ -97,10 +97,8 @@ var pushReplicationSchema = map[string]*schema.Schema{
 	},
 	"password": {
 		Type:      schema.TypeString,
-		Computed:  true,
+		Optional:  true,
 		Sensitive: true,
-		Description: "If a password is used to create the resource, it will be returned as encrypted and this will become the new state." +
-			"Practically speaking, what this means is that, the password can only be set, not gotten. ",
 	},
 	"enabled": {
 		Type:     schema.TypeBool,
@@ -236,7 +234,7 @@ func packPushReplication(pushReplication *GetPushReplication, d *schema.Resource
 			replication["url"] = repo.URL
 			replication["socket_timeout_millis"] = repo.SocketTimeoutMillis
 			replication["username"] = repo.Username
-			replication["password"] = repo.Password
+			replication["password"] = getMD5Hash(repo.Password)
 			replication["enabled"] = repo.Enabled
 			replication["sync_deletes"] = repo.SyncDeletes
 			replication["sync_properties"] = repo.SyncProperties
