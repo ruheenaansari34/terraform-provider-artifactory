@@ -82,7 +82,7 @@ pipelines:
 #            - sudo curl http://localhost:8082/router/api/v1/system/health
             #- cd scripts && ./run-artifactory-container.sh
             - >-
-              docker run -i -t -d --rm -v "scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" \
+              docker run -i -t -d --rm -v "${res_GitHubTFProviderRepoJFrogTest_resourcePath}/scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" \
                     -p8081:8081 -p8082:8082 -p8080:8080 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
             - echo "Waiting for Artifactory to start"
             - >-
