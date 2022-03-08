@@ -22,13 +22,6 @@ pipelines:
           timeoutSeconds: 1200 # 20 minutes
           runtime:
             type: host
-#          runtime:
-#            type: image
-#            image:
-#              auto:
-#                language: go
-#                versions:
-#                  - "1.15.2"
           integrations:
             - name: partnersSlack
             - name: gkeEnvVars
@@ -48,41 +41,36 @@ pipelines:
             - apt update
             - apt install -y golang
             - go version
-#            - echo "Install Terraform"
-#            - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DA418C88A3219F7B
-#            - sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-#            - sudo apt install terraform && terraform -version
-#            - add_run_variables gitHubRepoUrl=${res_GitHubTFProviderRepoJFrogTest_gitRepoRepositorySshUrl}
-#            - add_run_variables TFProviderRepo=$(echo ${gitHubRepoUrl} | sed -e 's/git@/@/g' -e 's/:/\//g')
-#            - add_run_variables repoFolder=$(echo "${res_GitHubTFProviderRepoJFrogTest_gitRepoFullName}" | sed -e 's/.*\///g')
-#            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath}
-#            - echo "Verify the code contents merged feature branch with development branch"
-#            #- git branch && ls -al
-#            - export PROVIDER_VERSION=$(git tag --sort=-v:refname | head -1 | sed  -n 's/v\([0-9]*\).\([0-9]*\).\([0-9]*\)/\1.\2.\3/p')
-#            - export NEXT_PROVIDER_VERSION=$(echo ${PROVIDER_VERSION}| awk -F '.' '{print $1 "." $2 "." $3 +1 }')
-#            - echo $PROVIDER_VERSION
-#            - echo $NEXT_PROVIDER_VERSION
-#            - echo "Rename the build to make it work on Ubuntu"
-#            - cat GNUmakefile | sed -e "s/darwin_amd64/linux_amd64/g" > GNUmakefile.tmp
-#            - cp GNUmakefile.tmp GNUmakefile && rm GNUmakefile.tmp
-#            - cat GNUmakefile
-#            - cat sample.tf | sed -e "s/version =.*/version = \"${NEXT_PROVIDER_VERSION}\"/g" > sample.tf.tmp
-#            - cp sample.tf.tmp sample.tf && rm sample.tf.tmp
-#            - cat sample.tf
+            # testing
+            - echo "Install Terraform"
+            - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DA418C88A3219F7B
+            - sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            - sudo apt install terraform && terraform -version
+            - add_run_variables gitHubRepoUrl=${res_GitHubTFProviderRepoJFrogTest_gitRepoRepositorySshUrl}
+            - add_run_variables TFProviderRepo=$(echo ${gitHubRepoUrl} | sed -e 's/git@/@/g' -e 's/:/\//g')
+            - add_run_variables repoFolder=$(echo "${res_GitHubTFProviderRepoJFrogTest_gitRepoFullName}" | sed -e 's/.*\///g')
+            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath}
+            - echo "Verify the code contents merged feature branch with development branch"
+            #- git branch && ls -al
+            - export PROVIDER_VERSION=$(git tag --sort=-v:refname | head -1 | sed  -n 's/v\([0-9]*\).\([0-9]*\).\([0-9]*\)/\1.\2.\3/p')
+            - export NEXT_PROVIDER_VERSION=$(echo ${PROVIDER_VERSION}| awk -F '.' '{print $1 "." $2 "." $3 +1 }')
+            - echo $PROVIDER_VERSION
+            - echo $NEXT_PROVIDER_VERSION
+            - echo "Rename the build to make it work on Ubuntu"
+            - cat GNUmakefile | sed -e "s/darwin_amd64/linux_amd64/g" > GNUmakefile.tmp
+            - cp GNUmakefile.tmp GNUmakefile && rm GNUmakefile.tmp
+            - cat GNUmakefile
+            - cat sample.tf | sed -e "s/version =.*/version = \"${NEXT_PROVIDER_VERSION}\"/g" > sample.tf.tmp
+            - cp sample.tf.tmp sample.tf && rm sample.tf.tmp
+            - cat sample.tf
             ## try to run Artifactory with docker compose
-            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath} # since we run it on the host, we need to manually move into the resource path
+            #- cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath} # since we run it on the host, we need to manually move into the resource path
             - printenv
             - jfrog config show
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
-#            - container=$(date +%s)
-#            - docker run -d -it --name ${container} -i -t -d --rm -v "$(pwd)scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" -p 8081:8081 -p 8082:8082 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
-#            - docker ps -al
-#            - sleep 240
-#            - sudo curl http://localhost:8082/router/api/v1/system/health
-            #- cd scripts && ./run-artifactory-container.sh
             - >-
               docker run -i -t -d --rm -v "${res_GitHubTFProviderRepoJFrogTest_resourcePath}/scripts/artifactory.lic:/artifactory_extra_conf/artifactory.lic:ro" \
                     -p8081:8081 -p8082:8082 -p8080:8080 releases-docker.jfrog.io/jfrog/artifactory-pro:7.24.3
@@ -98,8 +86,7 @@ pipelines:
             - export ARTIFACTORY_USERNAME=admin
             - export ARTIFACTORY_PASSWORD=password
             - echo "Get cookie to generate Access token"
-            - curl --version
-            - sleep 240
+            - echo "We need a pause to let UI come up" && sleep 240
             - sudo curl http://localhost:8082/router/api/v1/system/health
             - >-
               curl -c - "${ARTIFACTORY_URL}/ui/api/v1/ui/auth/login?_spring_security_remember_me=false" \
