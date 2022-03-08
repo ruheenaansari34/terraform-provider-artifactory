@@ -39,7 +39,7 @@ pipelines:
           inputResources:
             - name: GitHubTFProviderRepoJFrogTest
           environmentVariables:
-            NEW_RT_PASSWORD: ${int_gkeEnvVars_new_rt_password}
+            NEW_RT_PASSWORD: password
         execution:
           onStart:
             - echo "Preparing for work..."
