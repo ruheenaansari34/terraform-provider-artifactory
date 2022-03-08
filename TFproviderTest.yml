@@ -68,11 +68,11 @@ pipelines:
 #            - cp sample.tf.tmp sample.tf && rm sample.tf.tmp
 #            - cat sample.tf
             ## try to run Artifactory with docker compose
+            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath} # since we run it on the host, we need to manually move into the resource path
             - printenv
             - jfrog config show
             - jfrog --version
             - jfrog rt dl fozzie/native-steps/license/artifactory.cluster.license scripts/
-            - cd ${res_GitHubTFProviderRepoJFrogTest_resourcePath}
             - ls -al && pwd
             - cp scripts/native-steps/license/artifactory.cluster.license scripts/artifactory.lic
 #            - container=$(date +%s)
