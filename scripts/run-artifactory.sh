@@ -1,11 +1,14 @@
 #!/usr/bin/env sh
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+SCRIPT_DIR_TEST="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+echo ${SCRIPT_DIR_TEST}
+export SCRIPT_DIR=$(pwd)/scripts
 export ARTIFACTORY_VERSION=${ARTIFACTORY_VERSION:-7.27.10}
 echo "ARTIFACTORY_VERSION=${ARTIFACTORY_VERSION}"
 
 set -euf
 
+#docker-compose --project-directory ${SCRIPT_DIR} up -d --remove-orphans
 docker-compose --project-directory ${SCRIPT_DIR} up -d --remove-orphans
 
 echo "Waiting for Artifactory 1 to start"
